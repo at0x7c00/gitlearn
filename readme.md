@@ -22,9 +22,9 @@ workspace         stage                  local repository
 
 '''git diff readme.txt''': look difference between workspace and local repository.
 
-'''git log [--pretty=oneline][--graph]''': look git logs.
+'''git log [--pretty# oneline][--graph]''': look git logs.
 
-=版本切换=
+# 版本切换 
 Use '''HEAD''' to locate commit point.
 * <------HEAD(current)
 * <------HEAD^
@@ -47,7 +47,7 @@ workspace         stage                  local repository
 
 '''git reflog''':记录了每次操作历史
 
-=Working tree and Stage（工作区和暂存区）=
+# Working tree and Stage（工作区和暂存区） 
 [[Image:Git-index.png]]
 
 Git自动创建master分支，并用HEAD指向这个分支。
@@ -55,7 +55,7 @@ Git自动创建master分支，并用HEAD指向这个分支。
 
 '''管理修改'''：Git管理的是修改，而不是文件内容。第一次修改后添加到stage，之后在修改，只要不添加到stage，那么commit的只有第一次修改的内容。
 
-=撤销修改=
+# 撤销修改 
 <pre>
 workspace                  stage                  local repository
   |                          |                              |
@@ -65,7 +65,7 @@ workspace                  stage                  local repository
 
 '''git checkout -- <file>... ''': checkout file from local repository or stage to workspace(override workspace file).工作区和暂存区同时被覆盖。
 
-=撤回暂存区到工作区=
+# 撤回暂存区到工作区 
 <pre>
 workspace                   stage                  local repository
   |                           |                              |
@@ -78,10 +78,10 @@ workspace                   stage                  local repository
 
 撤销暂存区的修改：'''git reset HEAD <file>'''
 
-=删除文件=
+# 删除文件 
 '''git rm <file>''': 删除文件。直接通过系统也能删除文件，但是需要使用git add配合使用。git rm把物理删除和版本系统删除两个步骤都做了。
 
-=Remote Repository=
+# Remote Repository 
 '''git remote add <remote_repository_name> <remote_repository_url>''': to add a remote_repository. 
 
 eg. 
@@ -106,7 +106,7 @@ workspace      stage        local repository                   remote repository
 
 不仅master分支可以push到远程分支，其他分支同样可以：'''git push origin dev'''。
 
-=创建分支=
+# 创建分支 
 Fist,There is no branchs:
 
 [[Image:git-no-branch.png]]
@@ -137,21 +137,21 @@ Now,delete dev branch:
 
 创建+切换分支：'''git checkout -b <name>'''
 
-===分支策略===
+#   分支策略   
 [[Image:git-branch-use-strategy.png]]
 
-=合并分支=
+# 合并分支 
 
 合并某分支到当前分支：'''git merge [--no-ff]<name>''' (注意方向，否则merge不成功) merge完成之后再add到暂存区以提交。
 
 ''''--no-ff'''':Not Fast Forward，保留分支里的提交日志
 
-=删除分支=
+# 删除分支 
 合并之后可以顺利删除分支：'''git branch -d <name>'''
 
 没有合并的分支不能使用-d删除，会被告知“not fully merged”。如果一定要删除，必须使用-D，即'''git branch -D <name>'''
 
-=暂存(Stash)=
+# 暂存(Stash) 
 '''git stash''':保存现场。暂存当前所有被追踪的文件到一个stash栈中。为被track的文件不会受影响。
 
 '''git stash list''':查看stash栈的内容。
@@ -166,32 +166,32 @@ Now,delete dev branch:
 
 另外，stash记录是对所有分支共享的，意思是可以将一个分支下的修改stash起来，然后切换到另外一个分支执行恢复操作。pop动作可以将改动移动到其他分支，apply则可将改动复制到其他分支。
 
-=创建关联远程分支的本地分支=
+# 创建关联远程分支的本地分支 
 前面讲到过可以将任意本地分支push到远程仓库。如果远程仓库中有多个分支，使用'''git clone'''可以将这个仓库克隆到本地。克隆完成之后会发现其实只有一个master分支。如果需要切换到其他分支则需要创建一个本地分支，并且与远程分支做关联：
 
 '''git checkout -b dev origin/dev'''
 
 第一个dev就是要创建的本地分支，origin/dev表示是远程仓库中的分支。这样checkout之后，其实是将远程仓库中的dev分支加载到了本地的dev分支下。
 
-=Pull=
+# Pull 
 pull之前需要设置远程分支与本地分支的关联：
 
-'''git branch --set-upstream-to=origin/dev dev'''
+'''git branch --set-upstream-to# origin/dev dev'''
 
 然后再执行'''git pull'''就可以拉取文件到本地分支了。
 
-=多人协作流程=
+# 多人协作流程 
 # 首先，可以试图用'''git push origin <branch-name>'''推送自己的修改；
 # 如果推送失败，则因为远程分支比你的本地更新，需要先用'''git pull'''试图合并；如果git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream-to <branch-name> origin/<branch-name>。
 # 如果合并有冲突，则解决冲突，并在本地提交；
 # 没有冲突或者解决掉冲突后，再用'''git push origin <branch-name>'''推送就能成功！
 
-=Rebase=
+# Rebase 
 rebase操作可以把本地未push的分叉提交历史整理成直线；
 
 rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比。
 
-=Tag=
+# Tag 
 创建tag:'''git tag [-a] <tag_name> [-m "<tag_remark>" ] [<commit_id>]'''  默认是给最新的commit创建tag，如果个特定的commit创建tag则需要制定提交的id。
 
 查看所有tag:'''git tag'''
@@ -208,7 +208,7 @@ rebase的目的是使得我们在查看历史提交的变化时更容易，因�
 
 删除远程仓库的标签：先删除本地的，然后执行'''git push origin :refs/tags/<tag_name>'''删除远程的。
 
-=使用GitHub=
+# 使用GitHub 
 参与开源项目的流程是
 # Fork一个开源项目，其实就是将开源项目Clone一份到了你的Github中。
 # 这样你就可以随意修改了

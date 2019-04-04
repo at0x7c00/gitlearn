@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 test5
 update from master
 update from testing branch
 update from testing again
 update from master again
+=======
+Test.txt
+>>>>>>> da873bcb6aed4463a8c2677d8e6bead2a2b9e80e

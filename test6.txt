@@ -1,3 +1,8 @@
 test6 on master
 test6
+<<<<<<< HEAD
 update test6
+=======
+
+update test6
+>>>>>>> 4948a7282eadd6d02aab47a8056f6c81de4e3b00
